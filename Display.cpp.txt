@@ -1,0 +1,18 @@
+#include "Display.h"
+#include <iostream>
+#include <iomanip>
+
+void Display::printFormattedData(const std::vector<unsigned char>& data, Formatter& formatter) {
+    const int bytesPerRow = 8;
+    std::cout << "\nOffset |   HEX   |    BIN     | CHAR\n";
+    std::cout << "---------------------------------------\n";
+
+    for (size_t i = 0; i < data.size(); ++i) {
+        std::cout << std::setw(6) << std::setfill('0') << i << " | ";
+        std::cout << formatter.toHex(data[i]) << "     | ";
+        std::cout << formatter.toBin(data[i]) << " | ";
+        std::cout << formatter.toChar(data[i]) << "\n";
+    }
+
+    std::cout << "\n";
+}

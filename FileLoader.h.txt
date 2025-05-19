@@ -1,0 +1,18 @@
+#ifndef FILELOADER_H
+#define FILELOADER_H
+
+#include <vector>
+#include <string>
+
+class FileLoader {
+public:
+    FileLoader(const std::string& path);
+    bool load();
+    std::vector<unsigned char>& getData();
+
+private:
+    std::string filePath;
+    std::vector<unsigned char> data;
+};
+
+#endif

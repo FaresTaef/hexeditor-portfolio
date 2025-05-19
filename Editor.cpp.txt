@@ -1,0 +1,43 @@
+#include "Editor.h"
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+
+bool Editor::promptEdit(std::vector<unsigned char>& data) {
+    std::string input;
+    std::cout << "Edit mode - enter offset and new hex value (e.g., 5 A3), or 'q' to quit: ";
+    std::cin.ignore();
+    std::getline(std::cin, input);
+
+    if (input == "q" || input == "Q") return false;
+
+    std::istringstream iss(input);
+    int index;
+    std::string hexValue;
+    iss >> index >> hexValue;
+
+    if (index < 0 || index >= static_cast<int>(data.size()) || !isValidHex(hexValue)) {
+        std::cout << "Invalid input. Try again.\n";
+        return true;
+    }
+
+    data[index] = hexToByte(hexValue);
+    std::cout << "Byte at position " << index << " updated to " << hexValue << "\n";
+    return true;
+}
+
+bool Editor::isValidHex(const std::string& input) {
+    if (input.length() != 2) return false;
+    for (char c : input) {
+        if (!isxdigit(c)) return false;
+    }
+    return true;
+}
+
+unsigned char Editor::hexToByte(const std::string& hex) {
+    unsigned int byte;
+    std::stringstream ss;
+    ss << std::hex << hex;
+    ss >> byte;
+    return static_cast<unsigned char>(byte);
+}

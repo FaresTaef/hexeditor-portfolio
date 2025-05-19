@@ -1,0 +1,13 @@
+#ifndef DISPLAY_H
+#define DISPLAY_H
+
+#include <vector>
+#include <string>
+#include "Formatter.h"
+
+class Display {
+public:
+    void printFormattedData(const std::vector<unsigned char>& data, Formatter& formatter);
+};
+
+#endif

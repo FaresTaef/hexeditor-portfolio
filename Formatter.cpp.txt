@@ -1,0 +1,20 @@
+#include "Formatter.h"
+#include <bitset>
+#include <iomanip>
+#include <sstream>
+#include <cctype>
+
+std::string Formatter::toHex(unsigned char byte) {
+    std::stringstream ss;
+    ss << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << (int)byte;
+    return ss.str();
+}
+
+std::string Formatter::toBin(unsigned char byte) {
+    return std::bitset<8>(byte).to_string();
+}
+
+std::string Formatter::toChar(unsigned char byte) {
+    if (std::isprint(byte)) return std::string(1, byte);
+    else return ".";
+}

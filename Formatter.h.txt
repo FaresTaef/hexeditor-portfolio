@@ -1,0 +1,13 @@
+#ifndef FORMATTER_H
+#define FORMATTER_H
+
+#include <string>
+
+class Formatter {
+public:
+    std::string toHex(unsigned char byte);
+    std::string toBin(unsigned char byte);
+    std::string toChar(unsigned char byte);
+};
+
+#endif

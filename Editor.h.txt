@@ -1,0 +1,16 @@
+#ifndef EDITOR_H
+#define EDITOR_H
+
+#include <vector>
+#include <string>
+
+class Editor {
+public:
+    bool promptEdit(std::vector<unsigned char>& data);
+
+private:
+    bool isValidHex(const std::string& input);
+    unsigned char hexToByte(const std::string& hex);
+};
+
+#endif

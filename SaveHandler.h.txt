@@ -1,0 +1,12 @@
+#ifndef SAVEHANDLER_H
+#define SAVEHANDLER_H
+
+#include <vector>
+#include <string>
+
+class SaveHandler {
+public:
+    void promptSave(const std::vector<unsigned char>& data, const std::string& originalPath);
+};
+
+#endif

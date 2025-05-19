@@ -1,0 +1,14 @@
+CXX = g++
+CXXFLAGS = -Wall -std=c++11
+
+SRC = main.cpp FileLoader.cpp Formatter.cpp Display.cpp Editor.cpp SaveHandler.cpp
+OBJ = $(SRC:.cpp=.o)
+TARGET = hexeditor
+
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ)
+
+clean:
+	rm -f $(OBJ) $(TARGET)

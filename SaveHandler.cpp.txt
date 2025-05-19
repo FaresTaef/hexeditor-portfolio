@@ -1,0 +1,30 @@
+#include "SaveHandler.h"
+#include <iostream>
+#include <fstream>
+
+void SaveHandler::promptSave(const std::vector<unsigned char>& data, const std::string& originalPath) {
+    std::string choice;
+    std::cout << "Do you want to save changes? (y/n): ";
+    std::cin >> choice;
+
+    if (choice == "y" || choice == "Y") {
+        std::string savePath;
+        std::cout << "Save to (press Enter to overwrite original): ";
+        std::cin.ignore();
+        std::getline(std::cin, savePath);
+
+        if (savePath.empty()) savePath = originalPath;
+
+        std::ofstream outFile(savePath, std::ios::binary);
+        if (!outFile) {
+            std::cerr << "Failed to write to file.\n";
+            return;
+        }
+
+        outFile.write(reinterpret_cast<const char*>(data.data()), data.size());
+        outFile.close();
+        std::cout << "Changes saved to " << savePath << "\n";
+    } else {
+        std::cout << "Changes discarded.\n";
+    }
+}
