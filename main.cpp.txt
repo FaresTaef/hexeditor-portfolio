@@ -1,38 +1,31 @@
-#include <iostream>
-#include "FileLoader.h"
-#include "Formatter.h"
-#include "Editor.h"
-#include "Display.h"
-#include "SaveHandler.h"
+// FileLoader.h 
+class FileLoader {
+public:
+    FileLoader(const std::string& path);
+    bool load();
+    std::vector<unsigned char>& getData();
+};
 
-int main(int argc, char* argv[]) {
-    std::string filePath;
+// Formatter.h 
+class Formatter {
+public:
+    // format-related methods
+};
 
-    if (argc > 1) {
-        filePath = argv[1];
-    } else {
-        std::cout << "Enter path to binary file: ";
-        std::cin >> filePath;
-    }
+// Display.h 
+class Display {
+public:
+    void printFormattedData(const std::vector<unsigned char>& data, const Formatter& fmt);
+};
 
-    FileLoader loader(filePath);
-    if (!loader.load()) {
-        std::cerr << "Failed to load file." << std::endl;
-        return 1;
-    }
+// Editor.h 
+class Editor {
+public:
+    bool promptEdit(std::vector<unsigned char>& data);
+};
 
-    std::vector<unsigned char>& data = loader.getData();
-    Formatter formatter;
-    Display display;
-    Editor editor;
-    SaveHandler saver;
-
-    bool running = true;
-    while (running) {
-        display.printFormattedData(data, formatter);
-        running = editor.promptEdit(data);
-    }
-
-    saver.promptSave(data, filePath);
-    return 0;
-}
+// SaveHandler.h 
+class SaveHandler {
+public:
+    void promptSave(const std::vector<unsigned char>& data, const std::string& filePath);
+};            
